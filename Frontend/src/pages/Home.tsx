@@ -67,48 +67,80 @@ const Home: React.FC = () => {
           <div className="flex justify-center items-center bg-white mt-3">
             <div className="text-center ">
               <h1 className="text-3xl font-bold mb-4 mt-3">
-                SHOP DIFFERENT TYPES IN PAINTINGS
+                SHOP DIFFERENT TYPES OF PAINTINGS
               </h1>
               <div className="grid grid-cols-4 gap-4">
                 <img
                   src="src\images\acyric_painting.png"
                   alt="Painting Image 1"
-                  className="cursor-pointer w-full h-38 object-cover"
+                  className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
                 />
-                <img
-                  src="src\images\canvas_painting.png"
-                  alt="Painting Image 2"
-                  className="cursor-pointer w-full h-38 object-cover"
-                />
+                <a href="/Canvas-paintings">
+                  {" "}
+                  <img
+                    src="src\images\canvas_painting.png"
+                    alt="Painting Image 2"
+                    className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
+                  />
+                </a>
                 <img
                   src="src\images\digital_art.png"
                   alt="Painting Image 3"
-                  className="cursor-pointer w-full h-38 object-cover"
+                  className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
                 />
                 <img
                   src="src\images\handmade.png"
                   alt="Painting Image 4"
-                  className="cursor-pointer w-full h-38 object-cover"
+                  className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
                 />
                 <img
                   src="src\images\watercolor_painting.png"
                   alt="Painting Image 5"
-                  className="cursor-pointer w-full h-38 object-cover"
+                  className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
                 />
                 <img
                   src="src\images\nepali_painting.png"
                   alt="Painting Image 6"
-                  className="cursor-pointer w-full h-38 object-cover"
+                  className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
                 />
                 <img
                   src="src\images\OG_painting.png"
                   alt="Painting Image 7"
-                  className="cursor-pointer w-full h-38 object-cover"
+                  className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
                 />
                 <img
                   src="src\images\oil_painting.png"
                   alt="Painting Image 8"
-                  className="cursor-pointer w-full h-38 object-cover"
+                  className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-center items-center bg-white mt-3">
+            <div className="text-center ">
+              <h1 className="text-3xl font-bold mb-4 mt-3">
+                DIFFERENT THANGKA PAINTINGS
+              </h1>
+              <div className="grid grid-cols-4 gap-4">
+                <img
+                  src="src\images\thangka2.jpg"
+                  alt="Painting Image 1"
+                  className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
+                />
+                <img
+                  src="src\images\thangka1.jpg"
+                  alt="Painting Image 2"
+                  className="cursor-pointer w-full h-full object-cover scale-100 hover:scale-105"
+                />
+                <img
+                  src="src\images\thangka.jpg"
+                  alt="Painting Image 3"
+                  className="cursor-pointer w-full  object-cover scale-100 hover:scale-105"
+                />
+                <img
+                  src="src\images\thangka4.jpg"
+                  alt="Painting Image 4"
+                  className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105 "
                 />
               </div>
             </div>
