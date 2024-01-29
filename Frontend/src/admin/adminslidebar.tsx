@@ -1,175 +1,97 @@
-// import React, { useEffect } from "react";
-
-// const Slidebar: React.FC = () => {
-//     return(
-
-//     )
-// };
-
-// export default Slidebar;
-
-import { FC, useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import "../assets/css/admincss/adminslidebar.css";
 
-import Logo from "./logo.png";
-
-const menuItems = [
-  {
-    name: "Home",
-    icon: "home",
-  },
-  {
-    name: "Settings",
-    icon: "settings",
-    items: ["Display", "Editor", "Theme", "Interface"],
-  },
-  {
-    name: "Create",
-    icon: "add_box",
-    items: ["Article", "Document", "Report"],
-  },
-  {
-    name: "Account",
-    icon: "lock",
-    items: ["Dashboard", "Logout"],
-  },
-  {
-    name: "Products",
-    icon: "inventory_2",
-  },
-  {
-    name: "Favourites",
-    icon: "favorite",
-  },
-  {
-    name: "Search",
-    icon: "search",
-  },
-  {
-    name: "Users",
-    icon: "person",
-  },
-];
-
-type Item = {
-  name: string;
-  icon: string;
-  items: string[];
-};
-
-const Icon = ({ icon }: { icon: string }) => (
-  <span className="material-symbols-outlined">{icon}</span>
-);
-
-const NavHeader = () => (
-  <header className="sidebar-header">
-    <button type="button" className="button12">
-      <Icon icon="menu" />
-    </button>
-    <span>Admin</span>
-  </header>
-);
-
-type ButtonProps = {
-  onClick: (item: string) => void;
-  name: string;
-  icon?: string;
-  isActive: boolean;
-  hasSubNav?: boolean;
-};
-
-const NavButton: FC<ButtonProps> = ({
-  onClick,
-  name,
-  icon,
-  isActive,
-  hasSubNav,
-}) => (
-  <button
-    type="button"
-    onClick={() => onClick(name)}
-    className={isActive ? "active" : "button12"}
-  >
-    {icon && <Icon icon={icon} />}
-    <span>{name}</span>
-    {hasSubNav && <Icon icon={`expand_${isActive ? "less" : "more"}`} />}
-  </button>
-);
-
-type SubMenuProps = {
-  item: Item;
-  activeItem: string;
-  handleClick: (args0: string) => void;
-};
-
-const SubMenu: FC<SubMenuProps> = ({ item, activeItem, handleClick }) => {
-  const navRef = useRef<HTMLDivElement>(null);
-
-  const isSubNavOpen = (item: string, items: string[]) =>
-    items.some((i) => i === activeItem) || item === activeItem;
-
-  return (
-    <div
-      className={`sub-nav ${isSubNavOpen(item.name, item.items) ? "open" : ""}`}
-      style={{
-        height: !isSubNavOpen(item.name, item.items)
-          ? 0
-          : navRef.current?.clientHeight,
-      }}
-    >
-      <div ref={navRef} className="sub-nav-inner">
-        {item?.items.map((subItem) => (
-          <NavButton
-            onClick={handleClick}
-            name={subItem}
-            isActive={activeItem === subItem}
-          />
-        ))}
-      </div>
+const Slidebar: React.FC = () => {
+    return(
+      <>
+  <meta charSet="UTF-8" />
+  <title> Neumorphism Sidebar Menu | CodingLab </title>
+  <link rel="stylesheet" href="style.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+  />
+  <input type="checkbox" id="check" />
+  <label className="buttoanm bars" htmlFor="check">
+    <i className="fas fa-bars" />
+  </label>
+  <div className="side_bar">
+    <div className="title">
+      <div className="logo">CANVA-VISTA</div>
+      <label className=" buttonm cancel" htmlFor="check">
+        <i className="fas fa-times" />
+      </label>
     </div>
-  );
+    <ul>
+      <li>
+        <a href="/admin-dashboard">
+          <i className="fas fa-qrcode" />
+          Dashboard
+        </a>
+      </li>
+      <li>
+        <a href="/Create-painting">
+          <i className="fas fa-plus-square " />
+          Add/Create
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i className="fas fa-stream" />
+          Overview
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i className="fas fa-calendar-week" />
+          Events
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i className="fas fa-question-circle" />
+          About
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i className="fas fa-sliders-h" />
+          Services
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i className="fas fa-phone-volume" />
+          Contact
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i className="fas fa-comments" />
+          Feedback
+        </a>
+      </li>
+    </ul>
+    <div className="media_icons">
+      <a href="www.fb.com">
+        <i className="fab fa-facebook-f" />
+      </a>
+      <a href="#">
+        <i className="fab fa-twitter" />
+      </a>
+      <a href="#">
+        <i className="fab fa-instagram" />
+      </a>
+      <a href="#">
+        <i className="fab fa-youtube" />
+      </a>
+    </div>
+  </div>
+</>
+
+
+    )
 };
 
-export const Sidebar = () => {
-  const [activeItem, setActiveItem] = useState<string>("");
+export default Slidebar;
 
-  const handleClick = (item: string) => {
-    console.log("activeItem", activeItem);
-    setActiveItem(item !== activeItem ? item : "");
-  };
-
-  return (
-    <aside className="sidebar">
-      <NavHeader />
-      {menuItems.map((item) => (
-        <>
-          {!item.items && (
-            <NavButton
-              onClick={handleClick}
-              name={item.name}
-              icon={item.icon}
-              isActive={activeItem === item.name}
-              hasSubNav={!!item.items}
-            />
-          )}
-          {item.items && (
-            <>
-              <NavButton
-                onClick={handleClick}
-                name={item.name}
-                icon={item.icon}
-                isActive={activeItem === item.name}
-                hasSubNav={!!item.items}
-              />
-              <SubMenu
-                activeItem={activeItem}
-                handleClick={handleClick}
-                item={item}
-              />
-            </>
-          )}
-        </>
-      ))}
-    </aside>
-  );
-};

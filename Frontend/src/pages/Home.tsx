@@ -27,13 +27,13 @@ const Home: React.FC = () => {
         <div className="navvbaar">
           <Navbar />
         </div>
-        <div className="w-11/12 ml-32 mr-8  mt-20">
+        <div className="w-11/12 ml-32 mr-8  mt-20 bg-[url('./src/images/bg.png')] bg-cover bg-center bg-fixed bg-no-repeat ">
           <div className="slick-container rounded overflow-hidden">
             <Slider {...carouselSettings}>
               <div>
                 <img
                   className="w-full h-full  rounded"
-                  style={{ maxHeight: "550px", width: "100%" }}
+                  style={{ maxHeight: "750px", width: "100%" }}
                   src="src\images\1st.png"
                   alt="Image 1"
                 />
@@ -41,7 +41,7 @@ const Home: React.FC = () => {
               <div>
                 <img
                   className="w-full h-full  rounded"
-                  style={{ maxHeight: "550px", width: "100%" }}
+                  style={{ maxHeight: "750px", width: "100%" }}
                   src="src\images\2nd.png"
                   alt="Image 2"
                 />
@@ -49,7 +49,7 @@ const Home: React.FC = () => {
               <div>
                 <img
                   className="w-full h-full  rounded"
-                  style={{ maxHeight: "550px", width: "100%" }}
+                  style={{ maxHeight: "750px", width: "100%" }}
                   src="src\images\3rd.png"
                   alt="Image 3"
                 />
@@ -57,13 +57,15 @@ const Home: React.FC = () => {
               <div>
                 <img
                   className="w-full h-full  rounded"
-                  style={{ maxHeight: "550px", width: "100%" }}
+                  style={{ maxHeight: "750px", width: "100%" }}
                   src="src\images\4th.png"
                   alt="Image 4"
                 />
               </div>
             </Slider>
           </div>
+          <div className=" h-screen"></div>
+
           <div className="flex justify-center items-center bg-white mt-3">
             <div className="text-center ">
               <h1 className="text-3xl font-bold mb-4 mt-3">
@@ -116,7 +118,7 @@ const Home: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="flex justify-center items-center bg-white mt-3">
+          <div className="flex justify-center items-center bg-white mt-1">
             <div className="text-center ">
               <h1 className="text-3xl font-bold mb-4 mt-3">
                 DIFFERENT THANGKA PAINTINGS

@@ -27,7 +27,7 @@ const navbar: React.FC = () => {
       <nav className="navbar mt-20">
         <ul className="navbar__menu">
           <li className="navbar__item">
-            <a href="#" className="navbar__link">
+            <a href="/" className="navbar__link">
               <i data-feather="home" />
               <span>Home</span>
             </a>
