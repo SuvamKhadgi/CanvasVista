@@ -19,10 +19,7 @@ public class UserPojo {
     private Integer id;
 
     @NotNull(message = "Full name is required")
-    private String firstName;
-
-    @NotNull
-    private String lastName;
+    private String Name;
 
     @NotNull
     private String email;

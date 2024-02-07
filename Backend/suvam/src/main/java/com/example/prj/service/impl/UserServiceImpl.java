@@ -27,8 +27,7 @@ public class UserServiceImpl implements UserService {
                     .orElseThrow(()-> new NoSuchElementException("No data found"));
         }
 
-        user.setFirstName(userPojo.getFirstName());
-        user.setLastName(userPojo.getLastName());
+        user.setName(userPojo.getName());
         user.setEmail(userPojo.getEmail());
         user.setPassword(PasswordEncoderUtil.getInstance().encode(userPojo.getPassword()));
 
@@ -49,5 +48,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteById(Integer id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.getUserByEmail(email);
     }
 }

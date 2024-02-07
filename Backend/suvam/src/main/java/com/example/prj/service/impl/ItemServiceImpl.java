@@ -7,6 +7,7 @@ import com.example.prj.service.ItemService;
 import com.example.prj.util.ImageToBase64;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -55,6 +56,21 @@ public class ItemServiceImpl implements ItemService {
             itemRepository.save(item);
 
     }
+
+//        if (itemPojo.getItemImage() != null) {
+//            MultipartFile imageFile = itemPojo.getItemImage();
+//            String originalFilename = imageFile.getOriginalFilename();
+//            if (originalFilename != null && !originalFilename.isEmpty()) {
+//                StringBuilder fileNames = new StringBuilder();
+//                Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, originalFilename);
+//                fileNames.append(originalFilename);
+//                Files.write(fileNameAndPath, imageFile.getBytes());
+//                item.setItemImage(originalFilename);
+//            }
+//        }
+//
+//        itemRepository.save(item);
+//    }
 
     @Override
     public List<Item> findAll() {

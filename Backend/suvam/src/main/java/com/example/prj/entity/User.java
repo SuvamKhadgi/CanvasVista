@@ -20,11 +20,9 @@ public class User implements UserDetails {
     @GeneratedValue(generator="user_seq_gen", strategy = GenerationType.SEQUENCE)
     private Integer id;
 
-    @Column(name="firstName", nullable = false, length = 255)
-    private String firstName;
-
-    @Column(name="lastName", nullable = false)
-    private String lastName;
+    @Column(name="Name", nullable = false, length = 255)
+    private String Name;
+;
 
     @Column(name="email", nullable = false)
     private String email;
@@ -42,8 +40,6 @@ public class User implements UserDetails {
                     columnNames = {"user_id", "role_id"})
     )
     private Collection<Role> roles;
-
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

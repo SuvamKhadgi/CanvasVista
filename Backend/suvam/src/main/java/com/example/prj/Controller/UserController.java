@@ -5,6 +5,8 @@ import com.example.prj.pojo.UserPojo;
 import com.example.prj.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,5 +40,7 @@ public class UserController {
     public void deleteById(@PathVariable("id") Integer id){
         userService.deleteById(id);
     }
+
+
 
 }

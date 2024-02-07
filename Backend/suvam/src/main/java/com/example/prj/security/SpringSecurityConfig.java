@@ -46,6 +46,7 @@ public class SpringSecurityConfig {
                 .requestMatchers("/authenticate","/user/save")
                 .permitAll()
                 .requestMatchers("/item/**")
+//                .permitAll()
                 .hasAuthority("admin")
                 .anyRequest()
                 .authenticated()
