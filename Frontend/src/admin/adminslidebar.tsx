@@ -5,22 +5,17 @@ const Slidebar: React.FC = () => {
     return(
       <>
   <meta charSet="UTF-8" />
-  <title> Neumorphism Sidebar Menu | CodingLab </title>
-  <link rel="stylesheet" href="style.css" />
+  <title> </title>
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
   />
   <input type="checkbox" id="check" />
-  <label className="buttoanm bars" htmlFor="check">
-    <i className="fas fa-bars" />
-  </label>
+  <label className="buttoanm bars" htmlFor="check"><i className="fas fa-bars" /></label>
   <div className="side_bar">
     <div className="title">
       <div className="logo">CANVA-VISTA</div>
-      <label className=" buttonm cancel" htmlFor="check">
-        <i className="fas fa-times" />
-      </label>
+      <label className=" buttonm-cancel" htmlFor="check"><i className="fas fa-times" /></label>
     </div>
     <ul>
       <li>

@@ -5,13 +5,12 @@
   box-sizing: border-box;
   font-family: 'Poppins',sans-serif;
 }
-/* body{
-  background: #ecf0f3;
-} */
+
 .side_bar{
   position: relative;
   top: 0;
-  left: -100%;
+  left: 0;
+  /* right: -100%; */
   width: 300px;
   height: 100vh;
   background: #ecf0f3;
@@ -105,7 +104,7 @@
 .media_icons a:nth-child(4){
   color: #ff0000;
 }
-label{
+.buttoanm,.buttonm-cancel{
   font-size: 17px;
   color: #31344b;
   box-shadow: -3px -3px 7px #ffffff,
@@ -118,7 +117,7 @@ label{
   cursor: pointer;
   transition: all 0.3s ease;
 }
-label:hover{
+.buttoanm,.buttonm-cancel:hover{
   box-shadow: inset -3px -3px 7px #ffffff,
               inset 3px 3px 5px #ceced1;
   color: #3498db;
@@ -132,5 +131,5 @@ label:hover{
   top: 15px;
 }
 #check:checked ~ .side_bar{
-  left: 0;
+  left: -100%;
 }

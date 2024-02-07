@@ -1,6 +1,9 @@
 import "../assets/css/Login.css";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; 
+
 
 const LoginForm: React.FC = () => {
   useEffect(() => {
@@ -57,19 +60,70 @@ const LoginForm: React.FC = () => {
     };
   });
 
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate(); 
+
+    const handleSignUp = async () => {
+      // if (setName==null)
+        try {
+            const response = await axios.post('http://localhost:8082/user/save', {
+                name,
+                email,
+                password
+            });
+            console.log(response.data); 
+        } catch (error) {
+            console.error('Error signing up:', error.response.data); 
+        }
+    };
+    const handleLogin = async () => {
+      try {
+          const response = await axios.post('http://localhost:8082/authenticate', {
+          // const response = await axios.post('http://localhost:8082/login', {
+              email,
+              password
+          });
+  
+          if (response.status === 200) {
+              console.log(response.data); 
+              localStorage.setItem('accessToken', response.data.token);
+              localStorage.setItem('id', response.data.id);     
+            window.location.href="/admin-dashboard"
+            }
+      } catch (error) {
+        window.alert('Invalid username and password');
+
+          console.error('Error logging in:', error.response.data); 
+      }
+  };
+  
+  axios.interceptors.request.use(
+      (config) => {
+          const token = localStorage.getItem('accessToken');
+          if (token) {
+              config.headers.Authorization = `Bearer ${token}`;
+          }
+          return config;
+      },
+      (error) => {
+          return Promise.reject(error);
+      }
+  );
+  
+
   return (
     <>
       <div className="exclude-tailwind">
         <div className="bodyy">
           <meta charSet="UTF-8" />
           <title>CanvaVista</title>
-          {/* partial:index.partial.html */}
           <meta
             name="viewport"
             content="width=device-width, user-scalable=no, initial-scale=1.0"
           />
           <meta charSet="utf-8" />
-          {/* <link rel="stylesheet" type="text/css" href="../assets/css/Login.css" /> */}
           <link
             href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap"
             rel="stylesheet"
@@ -96,18 +150,20 @@ const LoginForm: React.FC = () => {
                 <span className="form__span">
                   or use email for registration
                 </span>
-                <input className="form__input" type="text" placeholder="Name" />
+                <input className="form__input" type="text" placeholder="Name" onChange={(e) => setName(e.target.value)} />
                 <input
                   className="form__input"
                   type="text"
                   placeholder="Email"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
                   className="form__input"
                   type="password"
                   placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
-                <button className="form__button button submit">SIGN UP</button>
+                <button className="form__button button submit" onClick={handleSignUp}>SIGN UP</button>
               </form>
             </div>
             <div className="container b-container" id="b-container">
@@ -133,14 +189,18 @@ const LoginForm: React.FC = () => {
                   className="form__input"
                   type="text"
                   placeholder="Email"
+                  value={email} onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
                   className="form__input"
                   type="password"
                   placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+
+                  // value={password} onChange={(e) => setPassword(e.target.value)}
                 />
                 <a className="form__link">Forgot your password?</a>
-                <button className="form__button button submit">SIGN IN</button>
+                <button className="form__button button submit"  onClick={handleLogin}>SIGN IN</button>
               </form>
             </div>
             <div className="switch" id="switch-cnt">
@@ -151,7 +211,7 @@ const LoginForm: React.FC = () => {
                 <p className="switch__description description">
                   To keep connected with us please login with your personal info
                 </p>
-                <button className="switch__button button switch-btn">
+                <button className="switch__button button switch-btn" >
                   SIGN IN
                 </button>
               </div>

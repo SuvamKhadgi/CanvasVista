@@ -1,12 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Navbar from "../components/navbar";
+// import CardComponent from '../components/cardcomponent';
+// import CreateCardForm from '../admin/createpaint';
+import axios from 'axios';
 
 const Canvaspainting: React.FC = () => {
+
   return (
     <>
       <Header />
-      <div className="containers123 flex ">
+      <div className="containers123 fleSx ">
         <div className="navvbaar">
           <Navbar />
         </div>
@@ -15,6 +19,7 @@ const Canvaspainting: React.FC = () => {
             CANVAS PAINTAING
           </h1>
           <br />
+
         </div>
       </div>
     </>
