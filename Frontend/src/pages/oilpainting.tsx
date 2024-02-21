@@ -7,9 +7,9 @@ import Navbar from "../components/navbar";
 // import CreateCardForm from '../admin/createpaint';
 import axios from 'axios';
 
-const Canvaspainting: React.FC = () => {
+const Oilpainting: React.FC = () => {
   const [items, setItems] = useState([]);
-  const [category, setCategory] = useState('canvas-painting');
+  const [category, setCategory] = useState('oil-painting');
   useEffect(() => {
     fetchData();
   }, []);
@@ -61,4 +61,4 @@ const Canvaspainting: React.FC = () => {
   );
 };
 
-export default Canvaspainting;
+export default Oilpainting;

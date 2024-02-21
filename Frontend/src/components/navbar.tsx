@@ -1,6 +1,9 @@
 import "../assets/css/Header.css";
-
-import React, { useEffect } from "react";
+interface DecodedToken {
+  roles?: string[];
+  // other token properties
+}
+import React, { useEffect, useState } from "react";
 const navbar: React.FC = () => {
   useEffect(() => {
     // Load Feather Icons script
@@ -19,11 +22,40 @@ const navbar: React.FC = () => {
     featherScript.onload = () => {
       window.feather.replace();
     };
-  }, []); // Empty dependency array ensures this runs once when the component mounts
+  }, []);
 
+  const handleLoginRedirect = () => {
+    const accessToken = localStorage.getItem('accessToken');
+
+    if (accessToken) {
+      const decodedToken = parseJwt(accessToken);
+      console.log('Decoded Token:', decodedToken);
+
+      if (decodedToken.roles && decodedToken.roles.includes("admin")) {
+        window.location.href = "/admin-dashboard";
+      } else {
+        window.location.href = "/";
+      }
+    } else {
+      window.location.href = "/login";
+    }
+  };
+
+
+  const parseJwt = (token: string) => {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split('')
+        .map((c) => `%${(`00${c.charCodeAt(0).toString(16)}`).slice(-2)}`)
+        .join('')
+    );
+
+    return JSON.parse(jsonPayload) as DecodedToken;
+  };
   return (
     <>
-      {/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"/> */}
       <nav className="navbar mt-20">
         <ul className="navbar__menu">
           <li className="navbar__item">
@@ -63,10 +95,10 @@ const navbar: React.FC = () => {
             </a>
           </li>
           <li className="navbar__item">
-            <a href="/login" className="navbar__link">
+            <button className="navbar__link" onClick={handleLoginRedirect}>
               <i data-feather="log-in" />
-              <span>login</span>
-            </a>
+              <span>Login</span>
+            </button>
           </li>
         </ul>
       </nav>

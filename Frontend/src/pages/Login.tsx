@@ -2,8 +2,12 @@ import "../assets/css/Login.css";
 
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; 
-
+import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
+interface DecodedToken {
+  roles?: string[];
+  // other token properties
+}
 
 const LoginForm: React.FC = () => {
   useEffect(() => {
@@ -63,55 +67,105 @@ const LoginForm: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
-    const handleSignUp = async () => {
-      // if (setName==null)
-        try {
-            const response = await axios.post('http://localhost:8082/user/save', {
-                name,
-                email,
-                password
-            });
-            console.log(response.data); 
-        } catch (error) {
-            console.error('Error signing up:', error.response.data); 
-        }
-    };
-    const handleLogin = async () => {
-      try {
-          const response = await axios.post('http://localhost:8082/authenticate', {
-          // const response = await axios.post('http://localhost:8082/login', {
-              email,
-              password
-          });
-  
-          if (response.status === 200) {
-              console.log(response.data); 
-              localStorage.setItem('accessToken', response.data.token);
-              localStorage.setItem('id', response.data.id);     
-            window.location.href="/admin-dashboard"
-            }
-      } catch (error) {
-        window.alert('Invalid username and password');
-
-          console.error('Error logging in:', error.response.data); 
-      }
+  const handleSignUp = async () => {
+    // if (setName==null)
+    try {
+      const response = await axios.post('http://localhost:8082/user/save', {
+        name,
+        email,
+        password
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error signing up:', error.response.data);
+    }
   };
-  
-  axios.interceptors.request.use(
-      (config) => {
-          const token = localStorage.getItem('accessToken');
-          if (token) {
-              config.headers.Authorization = `Bearer ${token}`;
-          }
-          return config;
-      },
-      (error) => {
-          return Promise.reject(error);
+  const handleLogin = async () => {
+    try {
+      // const response = await axios.post('http://localhost:8082/authenticate', {
+      //   // const response = await axios.post('http://localhost:8082/login', {
+      //   email,
+      //   password
+      // });
+
+      const response = await fetch('http://localhost:8082/authenticate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      // if (response.status === 200) {
+      //     console.log(response.data); 
+      //     localStorage.setItem('accessToken', response.data.token);
+      //     localStorage.setItem('id', response.data.id);     
+      //     localStorage.setItem('name', response.data.name);     
+      //   window.location.href="/admin-dashboard"
+      //   }
+
+      if (response.status === 200) {
+        const { token, id: user_id } = await response.json();
+        localStorage.setItem('accessToken', token);
+        localStorage.setItem('id', user_id);
+
+        // Decode the token to get user roles
+        const decodedToken: DecodedToken = parseJwt(token);
+        console.log('Decoded Token:', decodedToken);
+
+        // Check if the user has the 'admin' role
+        if (decodedToken.roles && decodedToken.roles.includes("admin")) {
+          // User has admin role, navigate to admin dashboard with user_id
+          window.location.href = "/admin-dashboard"
+
+        } else {
+          navigate(`/`);
+        }
+
+        // Show success message
+        toast.success('Login successful!');
+      } else {
+        // Handle unsuccessful login (e.g., show an error message)
+        console.error('Login failed');
+        toast.error('Login failed. Please check your credentials.');
       }
-  );
-  
+    } catch (error) {
+      window.alert('Invalid username and password');
+
+      console.error('Error logging in:', error.response.data);
+    }
+  };
+  // Function to decode JWT token without external libraries
+  const parseJwt = (token: string) => {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split('')
+        .map((c) => `%${(`00${c.charCodeAt(0).toString(16)}`).slice(-2)}`)
+        .join('')
+    );
+
+    return JSON.parse(jsonPayload) as DecodedToken;
+  };
+  // axios.interceptors.request.use(
+  //   (config) => {
+  //     const token = localStorage.getItem('accessToken');
+  //     if (token) {
+  //       config.headers.Authorization = `Bearer ${token}`;
+  //     }
+  //     return config;
+  //   },
+  //   (error) => {
+  //     return Promise.reject(error);
+  //   }
+  // );
+
 
   return (
     <>
@@ -197,10 +251,10 @@ const LoginForm: React.FC = () => {
                   placeholder="Password"
                   onChange={(e) => setPassword(e.target.value)}
 
-                  // value={password} onChange={(e) => setPassword(e.target.value)}
+                // value={password} onChange={(e) => setPassword(e.target.value)}
                 />
                 <a className="form__link">Forgot your password?</a>
-                <button className="form__button button submit"  onClick={handleLogin}>SIGN IN</button>
+                <button className="form__button button submit" onClick={handleLogin}>SIGN IN</button>
               </form>
             </div>
             <div className="switch" id="switch-cnt">

@@ -72,11 +72,13 @@ const Home: React.FC = () => {
                 SHOP DIFFERENT TYPES OF PAINTINGS
               </h1>
               <div className="grid grid-cols-4 gap-4">
-                <img
-                  src="src\images\acyric_painting.png"
-                  alt="Painting Image 1"
-                  className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
-                />
+                <a href="/acyric-painting">
+                  <img
+                    src="src\images\acyric_painting.png"
+                    alt="Painting Image 1"
+                    className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
+                  />
+                </a>
                 <a href="/Canvas-paintings">
                   {" "}
                   <img
@@ -85,36 +87,44 @@ const Home: React.FC = () => {
                     className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
                   />
                 </a>
-                <img
-                  src="src\images\digital_art.png"
-                  alt="Painting Image 3"
-                  className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
-                />
-                <img
-                  src="src\images\handmade.png"
-                  alt="Painting Image 4"
-                  className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
-                />
-                <img
-                  src="src\images\watercolor_painting.png"
-                  alt="Painting Image 5"
-                  className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
-                />
-                <img
-                  src="src\images\nepali_painting.png"
-                  alt="Painting Image 6"
-                  className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
-                />
-                <img
-                  src="src\images\OG_painting.png"
-                  alt="Painting Image 7"
-                  className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
-                />
-                <img
-                  src="src\images\oil_painting.png"
-                  alt="Painting Image 8"
-                  className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
-                />
+                <a href="/digitalart-painting">
+                  <img
+                    src="src\images\digital_art.png"
+                    alt="Painting Image 3"
+                    className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
+                  />
+                </a>
+                <a href="/handmade-painting">
+                  <img
+                    src="src\images\handmade.png"
+                    alt="Painting Image 4"
+                    className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
+                  />
+                </a>
+                <a href="/watercolor-painting">
+                  <img
+                    src="src\images\watercolor_painting.png"
+                    alt="Painting Image 5"
+                    className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
+                  />
+                </a>
+                <a href="/nepali-painting">
+                  <img
+                    src="src\images\nepali_painting.png"
+                    alt="Painting Image 6"
+                    className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
+                  />
+                </a><a href="/og-painting">
+                  <img
+                    src="src\images\OG_painting.png"
+                    alt="Painting Image 7"
+                    className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
+                  /></a><a href="/oil-painting">
+                  <img
+                    src="src\images\oil_painting.png"
+                    alt="Painting Image 8"
+                    className="cursor-pointer w-full h-38 object-cover scale-100 hover:scale-105"
+                  /></a>
               </div>
             </div>
           </div>

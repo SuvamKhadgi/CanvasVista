@@ -1,7 +1,10 @@
 .flip-card {
     background-color: transparent;
-    width: 190px;
+    max-width: 320px;
+    width: 320px;
+    /* flex: 0 0 calc(25% - 20px); */
     height: 254px;
+    margin: 5px;
     perspective: 1000px;
     font-family: sans-serif;
   }
