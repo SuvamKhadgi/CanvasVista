@@ -66,26 +66,26 @@ const navbar: React.FC = () => {
           </li>
           <li className="navbar__item">
             <a href="#" className="navbar__link">
+              <i data-feather="search" />
+              <span>Search</span>
+            </a>
+          </li>
+          <li className="navbar__item">
+            <a href="#" className="navbar__link">
+              <i data-feather="heart" />
+              <span>Wish List</span>
+            </a>
+          </li>
+          <li className="navbar__item">
+            <a href="#" className="navbar__link">
               <i data-feather="message-square" />
-              <span>Messages</span>
+              <span>Feedback</span>
             </a>
           </li>
           <li className="navbar__item">
             <a href="#" className="navbar__link">
-              <i data-feather="users" />
-              <span>Customers</span>
-            </a>
-          </li>
-          <li className="navbar__item">
-            <a href="#" className="navbar__link">
-              <i data-feather="folder" />
-              <span>Projects</span>
-            </a>
-          </li>
-          <li className="navbar__item">
-            <a href="#" className="navbar__link">
-              <i data-feather="archive" />
-              <span>Resources</span>
+              <i data-feather="user" />
+              <span>Account</span>
             </a>
           </li>
           <li className="navbar__item">
