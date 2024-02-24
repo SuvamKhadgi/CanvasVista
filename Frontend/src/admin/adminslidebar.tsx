@@ -31,13 +31,13 @@ const Slidebar: React.FC = () => {
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="/all-items">
               <i className="fas fa-stream" />
               Inventory
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="/users">
               <i className="fas fa-users" />
               Users
             </a>
