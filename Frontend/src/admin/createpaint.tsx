@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-// import { register } from 'swiper/element';
+import { Upload, Trash2 } from 'react-feather';
 
 function CreateCardForm() {
     const navigate = useNavigate()
@@ -66,21 +66,24 @@ function CreateCardForm() {
             <div className="">
                 <Sidebar />
             </div>
-            <div className=" text-3xl ml-8">
+            <div className=" text-3xl ml-8 w-full">
                 <h2 className="font-semibold text-center mb-8 mt-8">ADD PAINTING</h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
 
-                    <div className=" flex mb-11">
-                        <input className="input5 mr-1" type="text" placeholder="TITLE" {...register("itemName")} />
-                        <input className="input5 mr-1" type="textarea" placeholder="DETAIL" {...register("itemDescription")} />
-                        <input className="input5 max-w-80 mr-1" type="file" accept="image/*" required {...register("itemImage")} />
-
+                    <div className="  flex  mr-28 mb-11">
+                        <input className="input5  mr-28" type="text" placeholder="TITLE" {...register("itemName")} />
+                        <textarea className="input5  w-full resize-x" placeholder="DETAIL" {...register("itemDescription")} />
                     </div>
-                    <div className="flex ">
+                    <div className=" flex mb-11">
+                        <input className="input5 max-w-80 mr-1" type="file" accept="image/*" required {...register("itemImage")} />
+                    </div>
+                    <div className=" flex mb-11">
                         <input className="input5 mr-1 " {...register("itemQuantity")} type="text" placeholder="QUANTITY" />
-
+                    </div>
+                    <div className=" flex mb-11">
                         <input className="input5 mr-1" {...register("itemPerPrice")} type="text" placeholder="PER-PRICE" />
-
+                    </div>
+                    <div className=" flex mb-11">
                         <select id="category" {...register("categoryName")} className="border border-solid border-gray-400 rounded-3xl p-1">
                             <option value="canvas-painting">canvas-painting</option>
                             <option value="nepali-painting">nepali-painting</option>
@@ -91,19 +94,19 @@ function CreateCardForm() {
                             <option value="og-painting">og-painting</option>
                             <option value="handmade-painting">handmade-painting</option>
                         </select>
-                        {/* <button type="submit"  className="relative overflow-hidden ml-4 z-10 inline-flex items-center justify-center w-36 h-12 rounded-full shadow-md font-medium text-base text-center text-white bg-gradient-to-r from-green-400 to-yellow-400 focus:outline-none transition-all duration-500 ease-in-out hover:w-36 hover:bg-yellow-400">ADD</button> */}
 
                         <button
                             type="submit"
                             className="relative overflow-hidden ml-4 z-10 inline-flex items-center justify-center w-36 h-12 rounded-full shadow-md font-medium text-base text-center text-white bg-gradient-to-r from-green-400 to-yellow-400 focus:outline-none transition-all duration-500 ease-in-out hover:w-36 hover:bg-yellow-400"
                             onClick={() => console.log('Button clicked!')}
-                        > ADD</button>
+                        ><Upload /></button>
+                        <button type="submit" className="relative overflow-hidden ml-4 z-10 inline-flex items-center justify-center w-36 h-12 rounded-full shadow-md font-medium text-base text-center text-white bg-gradient-to-r from-green-400 to-yellow-400 focus:outline-none transition-all duration-500 ease-in-out hover:w-36 hover:bg-yellow-400"><Trash2 /></button>
 
                     </div>
                 </form>
                 <ToastContainer autoClose={1000} />
-            </div>
-        </div>
+            </div >
+        </div >
 
     );
 };

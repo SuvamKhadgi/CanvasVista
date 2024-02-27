@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { Trash, Trash2 } from 'react-feather';
+import { ShoppingCart, Trash, Trash2 } from 'react-feather';
 
 function Allitems() {
     const navigate = useNavigate()

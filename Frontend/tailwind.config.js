@@ -6,6 +6,7 @@ export default {
       "./src/pages/Home.tsx",
       "./src/assets/css/Home.css",
       "./src/pages/Home.tsx",
+      // "./src/pages/acyricpaint.tsx",
       "./src/assets/css/Header.css",
       "./src/admin/createpaint.tsx"
     ],

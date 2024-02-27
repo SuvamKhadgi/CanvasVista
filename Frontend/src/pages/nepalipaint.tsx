@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import '../assets/css/cardcomponent.css';
+import { ShoppingCart, PlusCircle, MinusCircle } from 'react-feather';
 
 import Navbar from "../components/navbar";
 // import CardComponent from '../components/cardcomponent';
@@ -8,6 +9,7 @@ import Navbar from "../components/navbar";
 import axios from 'axios';
 
 const Nepalipainting: React.FC = () => {
+  const userId = localStorage.getItem('id');
   const [items, setItems] = useState([]);
   const [category, setCategory] = useState('nepali-painting');
   useEffect(() => {
@@ -24,7 +26,36 @@ const Nepalipainting: React.FC = () => {
       console.error('Error fetching data:', error);
     }
   };
+  const handleAddToCart = async (itemId) => {
+    try {
+      const response = await axios.post('http://localhost:8082/cart/save', {
+        itemId: itemId,
+        userId: userId,
+        itemQuantity: quantities[itemId] || 1
+      });
+      console.log('Item added to cart:', response.data);
+    } catch (error) {
+      console.error('Error adding item to cart:', error);
+    }
+  };
 
+
+  const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
+  const handleIncrease = (itemId: string) => {
+    const item = items.find((item: any) => item.id === itemId);
+    if (item) {
+      const currentQuantity = quantities[itemId] || 0;
+      if (currentQuantity < item.itemQuantity) {
+        setQuantities({ ...quantities, [itemId]: currentQuantity + 1 });
+      }
+    }
+  };
+
+  const handleDecrease = (itemId: string) => {
+    if (quantities[itemId] && quantities[itemId] > 1) {
+      setQuantities({ ...quantities, [itemId]: quantities[itemId] - 1 });
+    }
+  };
 
   return (
     <>
@@ -46,10 +77,18 @@ const Nepalipainting: React.FC = () => {
                     <img style={{ height: '100%', borderRadius: "1rem" }} src={`data:image/jpeg;base64,${item.itemImage}`} alt={item.name} />
                   </div>
                   <div className="flip-card-back">
+                    <div className="ad-cart" style={{ textAlign: "end" }}>
+                      <button onClick={() => handleAddToCart(item.id)} style={{ borderRadius: '1rem', backgroundColor: "rgba(255, 0, 0, 0.3)", padding: "9px" }}><ShoppingCart /></button>
+                    </div>
                     <p className="title">{item.itemName}</p>
                     <p>{item.itemDescription}</p>
-                    <p>Quantity: {item.itemQuantity}</p>
                     <p>Price: RS.{item.itemPerPrice}</p>
+                    <p>Quantity: {item.itemQuantity}</p>
+                    <div>
+                      <button className="mr-8" onClick={() => handleDecrease(item.id)}><MinusCircle /></button>
+                      <span>{quantities[item.id] || 1}</span>
+                      <button className="ml-8" onClick={() => handleIncrease(item.id)}><PlusCircle /></button>
+                    </div>
                   </div>
                 </div>
               </div>
