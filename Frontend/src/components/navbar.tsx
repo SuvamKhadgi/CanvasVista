@@ -83,7 +83,7 @@ const navbar: React.FC = () => {
             </a>
           </li>
           <li className="navbar__item">
-            <a href="#" className="navbar__link">
+            <a href="/myaccount" className="navbar__link">
               <i data-feather="user" />
               <span>Account</span>
             </a>

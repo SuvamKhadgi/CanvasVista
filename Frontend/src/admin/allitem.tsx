@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Sidebar from "./adminslidebar";
 import "../assets/css/admincss/createpaint.css"
 import axios from 'axios';
-import { useForm } from "react-hook-form";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
-import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { ShoppingCart, Trash, Trash2 } from 'react-feather';
+import { Trash2 } from 'react-feather';
 
 function Allitems() {
     const navigate = useNavigate()

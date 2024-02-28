@@ -48,7 +48,7 @@ function Users() {
                                 <th className='font-medium'>Username</th>
                                 <th className='font-medium'>Email</th>
                                 <th className='font-medium'>Authority</th>
-                                <th className='font-medium'>Change Auth</th>
+                                {/* <th className='font-medium'>Change Auth</th> */}
 
                             </tr>
                         </thead>

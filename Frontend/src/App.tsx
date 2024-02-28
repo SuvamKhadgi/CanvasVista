@@ -15,7 +15,8 @@ import Dashboard from "./admin/admindashboard.tsx";
 import CreateCardForm from "./admin/createpaint.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Users from "./admin/users.tsx"
-// import ItemDisplay from "./pages/admin/ItemDsiplay.tsx";
+import Account from "./pages/account.tsx";
+import UpdateProfile from "./pages/updateprofile.tsx";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -28,8 +29,8 @@ const router = createBrowserRouter([
   { path: "/nepali-painting", element: <Nepalipainting /> },
   { path: "/handmade-painting", element: <Handmade /> },
   { path: "/digitalart-painting", element: <Digitalpainting /> },
-  // {path:"/admin/itemdisplay",element:<ItemDisplay />},
-
+  { path: "/myaccount", element: <Account /> },
+  { path: "/updateprofile", element: <UpdateProfile /> },
 
   { path: "/admin-dashboard", element: <Dashboard /> },
   { path: "/Create-painting", element: <CreateCardForm /> },
