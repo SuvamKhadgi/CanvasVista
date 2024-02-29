@@ -9,8 +9,9 @@ import lombok.Setter;
 public class OrderPojo {
     private Integer id;
     private Integer userId;
-    private Integer itemId;
-    private Integer salesQuantity;
+    private Integer cartId;
+    private String address;
+    private Integer phone_no;
 
 
 }
