@@ -17,7 +17,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Users from "./admin/users.tsx"
 import Account from "./pages/account.tsx";
 import UpdateProfile from "./pages/updateprofile.tsx";
-
+import Searchproduct from "./pages/search.tsx";
+import Whislist from "./pages/wishlist.tsx";
+import Feedback from "./pages/feedback.tsx";
+// import help
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
   { path: "/login", element: <Login /> },
@@ -31,6 +34,10 @@ const router = createBrowserRouter([
   { path: "/digitalart-painting", element: <Digitalpainting /> },
   { path: "/myaccount", element: <Account /> },
   { path: "/updateprofile", element: <UpdateProfile /> },
+  { path: '/Search', element: <Searchproduct /> },
+  { path: '/wishlist', element: <Whislist /> },
+  { path: '/feedback', element: <Feedback /> },
+  // { path: '/help', element: <Help /> },
 
   { path: "/admin-dashboard", element: <Dashboard /> },
   { path: "/Create-painting", element: <CreateCardForm /> },

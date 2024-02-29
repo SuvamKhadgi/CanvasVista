@@ -65,19 +65,19 @@ const navbar: React.FC = () => {
             </a>
           </li>
           <li className="navbar__item">
-            <a href="#" className="navbar__link">
+            <a href="/search" className="navbar__link">
               <i data-feather="search" />
               <span>Search</span>
             </a>
           </li>
           <li className="navbar__item">
-            <a href="#" className="navbar__link">
+            <a href="/wishlist" className="navbar__link">
               <i data-feather="heart" />
               <span>Wish List</span>
             </a>
           </li>
           <li className="navbar__item">
-            <a href="#" className="navbar__link">
+            <a href="/feedback" className="navbar__link">
               <i data-feather="message-square" />
               <span>Feedback</span>
             </a>
