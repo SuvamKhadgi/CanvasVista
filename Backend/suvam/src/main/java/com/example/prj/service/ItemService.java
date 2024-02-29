@@ -15,4 +15,8 @@ public interface ItemService {
     Optional<Item> findById(Integer id);
 
     void deleteById(Integer id);
+
+    void updateItem(Integer id, ItemPojo updatedItemPojo) ;
+    List<Item> searchByName(String itemName);
+
 }

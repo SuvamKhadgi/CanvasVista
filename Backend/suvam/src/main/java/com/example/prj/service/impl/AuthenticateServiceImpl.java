@@ -42,6 +42,6 @@ public class AuthenticateServiceImpl implements AuthenticateService {
                 .orElseThrow(() -> new EntityNotFoundException("User not found."));
         UserDetails userDetails = (UserDetails) user;
         String jwtToken = jwtService.generateToken(userDetails);
-        return AuthenticateResponse.builder().token(jwtToken).id(user.getId()).build();
+        return AuthenticateResponse.builder().token(jwtToken).id(user.getId()).name(user.getName()).build();
     }
 }

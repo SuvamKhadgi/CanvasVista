@@ -23,6 +23,9 @@ public class Item {
     @Column(name="item_Description", nullable = false, length = 255)
     private String itemDescription;
 
+    @Column(name="item_Category", nullable = false, length = 255)
+    private String itemCategory;
+
     @Column(name="item_Quantity", nullable = false)
     private Integer itemQuantity;
 

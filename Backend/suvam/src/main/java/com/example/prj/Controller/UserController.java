@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RequestMapping("/user")
@@ -41,6 +42,15 @@ public class UserController {
         userService.deleteById(id);
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable("id") Integer id, @RequestBody UserPojo updatedUserDetails) {
+        try {
+            userService.updateUser(id, updatedUserDetails);
+            return new ResponseEntity<>("User updated successfully", HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
+    }
 
 
-}
+    }

@@ -37,8 +37,8 @@ public class ItemServiceImpl implements ItemService {
         }
 
         item.setItemName(itemPojo.getItemName());
-
         item.setItemDescription(itemPojo.getItemDescription());
+        item.setItemCategory(itemPojo.getItemCategory());
         item.setItemQuantity(itemPojo.getItemQuantity());
         item.setItemPerPrice(itemPojo.getItemPerPrice());
 
@@ -90,5 +90,38 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public void deleteById(Integer id) {
            itemRepository.deleteById(id);
+    }
+//    @Override
+//    public List<Item> searchByName(String itemName) {
+//        List<Item> items = itemRepository.findByItemNameIgnoreCase(itemName);
+//        items = items.stream().map(item -> {
+//            item.setItemImage(imageToBase64.getImageBase64("/itemImage/" + item.getItemImage()));
+//            return item;
+//        }).collect(Collectors.toList());
+//        return items;
+//    }
+@Override
+public List<Item> searchByName(String itemName) {
+    List<Item> items = itemRepository.findByItemNameIgnoreCaseContaining(itemName);
+    items = items.stream().map(item -> {
+        item.setItemImage(imageToBase64.getImageBase64("/itemImage/" + item.getItemImage()));
+        return item;
+    }).collect(Collectors.toList());
+    return items;
+}
+    @Override
+    public void updateItem(Integer id, ItemPojo updatedItemPojo)  {
+        Optional<Item> optionalItem = itemRepository.findById(id);
+        if (optionalItem.isPresent()) {
+            Item item = optionalItem.get();
+            // Update the item fields with the updatedItemPojo values
+            item.setItemName(updatedItemPojo.getItemName());
+            item.setItemDescription(updatedItemPojo.getItemDescription());
+            item.setItemPerPrice(updatedItemPojo.getItemPerPrice());
+            // Save the updated item
+            itemRepository.save(item);
+        } else {
+//            throw new ItemNotFoundException("Item not found with id: " + id);
+        }
     }
 }

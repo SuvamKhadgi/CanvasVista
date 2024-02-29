@@ -18,4 +18,6 @@ public interface UserService {
 
     Optional<User> getUserByEmail(String email);
 
+    void updateUser(Integer id, UserPojo updatedUserDetails);
+
 }

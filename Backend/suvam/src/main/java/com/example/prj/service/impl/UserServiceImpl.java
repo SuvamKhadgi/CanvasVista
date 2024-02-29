@@ -54,4 +54,17 @@ public class UserServiceImpl implements UserService {
     public Optional<User> getUserByEmail(String email) {
         return userRepository.getUserByEmail(email);
     }
+
+
+    @Override
+    public void updateUser(Integer id, UserPojo updatedUserDetails) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("User not found"));
+
+        user.setName(updatedUserDetails.getName());
+        user.setEmail(updatedUserDetails.getEmail());
+        user.setPassword(PasswordEncoderUtil.getInstance().encode(updatedUserDetails.getPassword()));
+
+        userRepository.save(user);
+    }
 }

@@ -18,6 +18,8 @@ public class ItemPojo {
     private MultipartFile itemImage;
     @NotEmpty
     private String itemDescription;
+    @NotEmpty
+    private String itemCategory;
     @NotNull
     private Integer itemQuantity;
     @NotNull
