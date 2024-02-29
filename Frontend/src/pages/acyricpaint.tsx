@@ -31,6 +31,7 @@ const Acyricpaint: React.FC = () => {
     try {
       const response = await axios.post('http://localhost:8082/cart/save', {
         itemId: itemId,
+        cartId: userId,
         userId: userId,
         itemQuantity: quantities[itemId] || 1
       });

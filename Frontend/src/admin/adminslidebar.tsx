@@ -50,9 +50,9 @@ const Slidebar: React.FC = () => {
           </li>
 
           <li>
-            <a href="#">
-              <i className="fas fa-phone-volume" />
-              Contact
+            <a href="/all-order">
+              <i className="fas fa-shopping-cart " />
+              Order
             </a>
           </li>
           <li>

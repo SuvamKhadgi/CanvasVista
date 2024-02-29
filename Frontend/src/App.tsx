@@ -21,6 +21,7 @@ import Searchproduct from "./pages/search.tsx";
 import Whislist from "./pages/wishlist.tsx";
 import Feedback from "./pages/feedback.tsx";
 import Ordercart from "./pages/order.tsx";
+import Allorder from "./admin/allorder.tsx";
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
   { path: "/login", element: <Login /> },
@@ -43,6 +44,7 @@ const router = createBrowserRouter([
   { path: "/Create-painting", element: <CreateCardForm /> },
   { path: "/users", element: <Users /> },
   { path: "/all-items", element: <Allitems /> },
+  { path: "/all-order", element: <Allorder /> },
 ]);
 
 const queryClient = new QueryClient();

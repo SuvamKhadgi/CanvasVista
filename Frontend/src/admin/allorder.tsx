@@ -7,11 +7,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { Trash2 } from 'react-feather';
 
-function Allitems() {
+function Allorder() {
     const navigate = useNavigate()
     useEffect(() => {
         if (!localStorage.getItem("accessToken")) {
-            //   alert('PLEASE LOGIN')
             navigate('/login', { replace: true })
         }
     }, [])
@@ -23,9 +22,8 @@ function Allitems() {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:8082/item/getAll');
+            const response = await axios.get('http://localhost:8082/order/getAll');
             setItems(response.data);
-            //   setItems(response.data.filter((item: any) => item.itemCategory === category));
 
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -35,7 +33,7 @@ function Allitems() {
 
     const handleDelete = async (id: any) => {
         try {
-            await axios.delete(`http://localhost:8082/item/deleteById/${id}`);
+            await axios.delete(`http://localhost:8082/order/deleteById/${id}`);
             setItems(items.filter(item => item.id !== id));
             toast.success('Item deleted successfully');
         } catch (error) {
@@ -56,13 +54,12 @@ function Allitems() {
                     <table className="neumorphic w-full">
                         <thead>
                             <tr>
-                                <th className='font-medium'>ID</th>
+                                <th className='font-medium'>CartID</th>
+                                <th className='font-medium'>UserID</th>
+                                <th className='font-medium'>ItemID</th>
                                 <th className='font-medium'>ItemName</th>
-                                <th className='font-medium'>Image</th>
-                                <th className='font-medium'>Description</th>
-                                <th className='font-medium'>Categories</th>
-                                <th className='font-medium'>Quantity</th>
-                                <th className='font-medium'>Price</th>
+                                <th className='font-medium'>Address</th>
+                                <th className='font-medium'>PhoneNO</th>
                                 <th className='font-medium'>Actions</th>
 
                             </tr>
@@ -71,12 +68,11 @@ function Allitems() {
                             {items.map((items: any) => (
                                 <tr key={items.id}>
                                     <td >{items.id}</td>
-                                    <td >{items.itemName}</td>
-                                    <td ><img style={{ height: '200px' }} src={`data:image/jpeg;base64,${items.itemImage}`}></img></td>
-                                    <td >{items.itemDescription}</td>
-                                    <td >{items.itemCategory}</td>
-                                    <td >{items.itemQuantity}</td>
-                                    <td >{items.itemPerPrice}</td>
+                                    <td >{items.user.id}</td>
+                                    <td >{items.cart.item.id}</td>
+                                    <td >{items.cart.item.itemName}</td>
+                                    <td >{items.address}</td>
+                                    <td >{items.phone_no}</td>
                                     <td>
                                         <button className='rounded-2xl' onClick={() => handleDelete(items.id)}><Trash2 /></button>
                                     </td>
@@ -95,7 +91,7 @@ function Allitems() {
     );
 };
 
-export default Allitems;
+export default Allorder;
 
 
 
