@@ -20,7 +20,7 @@ import UpdateProfile from "./pages/updateprofile.tsx";
 import Searchproduct from "./pages/search.tsx";
 import Whislist from "./pages/wishlist.tsx";
 import Feedback from "./pages/feedback.tsx";
-// import help
+import Ordercart from "./pages/order.tsx";
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
   { path: "/login", element: <Login /> },
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
   { path: '/Search', element: <Searchproduct /> },
   { path: '/wishlist', element: <Whislist /> },
   { path: '/feedback', element: <Feedback /> },
-  // { path: '/help', element: <Help /> },
+  { path: '/order', element: <Ordercart /> },
 
   { path: "/admin-dashboard", element: <Dashboard /> },
   { path: "/Create-painting", element: <CreateCardForm /> },

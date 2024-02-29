@@ -173,7 +173,7 @@ const UpdateProfile: React.FC = () => {
     };
 
     useEffect(() => {
-        s
+
         if (editedDetails && confirmPassword !== editedDetails.password) {
             setPasswordsMatch(false);
             toast.error('Password incorrect!');

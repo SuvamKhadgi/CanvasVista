@@ -90,3 +90,37 @@ table.neumorphic td:hover::after {
   width: 100%;
   z-index: -1;
 }
+
+.odrbx {
+  width: 100%;
+  display: ruby;
+  
+  box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+  overflow: hidden;
+  /* margin-top: 20px; */
+}
+
+.odrbx table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.odrbx th, .odrbx td {
+  padding: 12px;
+  text-align: left;
+}
+
+.odrbx th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.odrbx tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.odrbx tbody tr:hover {
+  background-color: #f0f0f0;
+}
+

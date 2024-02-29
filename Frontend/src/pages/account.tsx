@@ -29,7 +29,6 @@ const Account: React.FC = () => {
     const fetchUserDetails = async () => {
         try {
             const userId = localStorage.getItem('id');
-            // const token = localStorage.getItem('accessToken'); // Retrieve the bearer token from localStorage
 
 
             if (userId) {
@@ -41,12 +40,6 @@ const Account: React.FC = () => {
                     });
                 setUserDetails(response.data);
 
-                // Set the initial values for editing
-                // setEditedDetails({
-                //     firstName: response.data.firstName,
-                //     lastName: response.data.lastName,
-                //     email: response.data.email,
-                // });
             }
         } catch (error) {
             console.error('Error fetching user details:', error);
