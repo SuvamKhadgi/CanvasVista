@@ -2,14 +2,21 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import '../assets/css/cardcomponent.css';
 import { ShoppingCart, PlusCircle, MinusCircle } from 'react-feather';
-
 import Navbar from "../components/navbar";
 import axios from 'axios';
-
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom';
 const Acyricpaint: React.FC = () => {
   const [items, setItems] = useState([]);
   const userId = localStorage.getItem('id');
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (!localStorage.getItem("accessToken")) {
+      // navigate('/login', { replace: true })
+      toast.error('Please LOGIN ');
 
+    }
+  }, [])
   const [category, setCategory] = useState('acyric-painting');
   useEffect(() => {
     fetchData();
@@ -36,8 +43,10 @@ const Acyricpaint: React.FC = () => {
         itemQuantity: quantities[itemId] || 1
       });
       console.log('Item added to cart:', response.data);
+      toast.success("successfull added item to your cart")
     } catch (error) {
       console.error('Error adding item to cart:', error);
+      toast.error("Faild To Add Item ");
     }
   };
 
@@ -98,6 +107,19 @@ const Acyricpaint: React.FC = () => {
             ))}
           </div>
         </div>
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+          transition:Bounce
+        />
       </div>
     </>
   );

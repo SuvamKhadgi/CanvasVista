@@ -4,13 +4,21 @@ import '../assets/css/cardcomponent.css';
 import { ShoppingCart, PlusCircle, MinusCircle } from 'react-feather';
 
 import Navbar from "../components/navbar";
-// import CardComponent from '../components/cardcomponent';
-// import CreateCardForm from '../admin/createpaint';
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Nepalipainting: React.FC = () => {
   const userId = localStorage.getItem('id');
   const [items, setItems] = useState([]);
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (!localStorage.getItem("accessToken")) {
+      // navigate('/login', { replace: true })
+      toast.error('Please LOGIN ');
+
+    }
+  }, [])
   const [category, setCategory] = useState('nepali-painting');
   useEffect(() => {
     fetchData();
@@ -34,6 +42,10 @@ const Nepalipainting: React.FC = () => {
         itemQuantity: quantities[itemId] || 1
       });
       console.log('Item added to cart:', response.data);
+      toast.success("successfull added item to your cart")
+      toast.error("Failed to add the item to your cart");
+
+
     } catch (error) {
       console.error('Error adding item to cart:', error);
     }
@@ -93,7 +105,19 @@ const Nepalipainting: React.FC = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </div><ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            transition:Bounce
+          />
         </div>
       </div>
     </>

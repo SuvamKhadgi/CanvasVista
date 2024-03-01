@@ -35,10 +35,10 @@ function Allorder() {
         try {
             await axios.delete(`http://localhost:8082/order/deleteById/${id}`);
             setItems(items.filter(item => item.id !== id));
-            toast.success('Item deleted successfully');
+            toast.success('ORDER deleted successfully');
         } catch (error) {
             console.error('Error deleting item:', error);
-            toast.error('Failed to delete item');
+            toast.error('Failed to delete ORDER');
         }
     };
 

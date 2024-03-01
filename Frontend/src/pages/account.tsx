@@ -4,7 +4,8 @@ import Header from "../components/Header";
 import Navbar from "../components/navbar";
 import axios from "axios";
 import { Trash2 } from 'react-feather';
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom';
 
 interface UserDetails {
     id: number;
@@ -16,15 +17,30 @@ interface UserDetails {
 
 const Account: React.FC = () => {
     const [userDetails, setUserDetails] = useState<UserDetails>();
-    // const [editedDetails, setEditedDetails] = useState({
-    //     firstName: '',
-    //     lastName: '',
-    //     email: '',
-    // });
+    const navigate = useNavigate()
+    // useEffect(() => {
+    //     if (!localStorage.getItem("accessToken")) {
+    //         navigate('/login', { replace: true })
+    //         toast.error('Please LOGIN ');
+
+    //     }
+    // }, [])
+    // useEffect(() => {
+    //     fetchUserDetails();
+    // }, []);
 
     useEffect(() => {
-        fetchUserDetails();
-    }, []);
+        const checkAuthentication = async () => {
+            if (!localStorage.getItem('accessToken')) {
+                navigate('/login', { replace: true });
+                toast.error('Please log in.');
+            } else {
+                await fetchUserDetails();
+            }
+        };
+
+        checkAuthentication();
+    }, [navigate]);
 
     const fetchUserDetails = async () => {
         try {

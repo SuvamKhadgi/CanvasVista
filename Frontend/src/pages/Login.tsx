@@ -3,7 +3,7 @@ import "../assets/css/Login.css";
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 interface DecodedToken {
   roles?: string[];
   // other token properties
@@ -78,17 +78,13 @@ const LoginForm: React.FC = () => {
         password
       });
       console.log(response.data);
+      toast.success("User created successfully!");
     } catch (error) {
       console.error('Error signing up:', error.response.data);
     }
   };
   const handleLogin = async () => {
     try {
-      // const response = await axios.post('http://localhost:8082/authenticate', {
-      //   // const response = await axios.post('http://localhost:8082/login', {
-      //   email,
-      //   password
-      // });
 
       const response = await fetch('http://localhost:8082/authenticate', {
         method: 'POST',
@@ -110,27 +106,21 @@ const LoginForm: React.FC = () => {
       //   }
 
       if (response.status === 200) {
+
         const { token, id: user_id } = await response.json();
         localStorage.setItem('accessToken', token);
         localStorage.setItem('id', user_id);
-
-        // Decode the token to get user roles
         const decodedToken: DecodedToken = parseJwt(token);
         console.log('Decoded Token:', decodedToken);
-
-        // Check if the user has the 'admin' role
         if (decodedToken.roles && decodedToken.roles.includes("admin")) {
-          // User has admin role, navigate to admin dashboard with user_id
-          window.location.href = "/admin-dashboard"
+          window.location.href = "/create-painting"
 
         } else {
           navigate(`/`);
         }
 
-        // Show success message
         toast.success('Login successful!');
       } else {
-        // Handle unsuccessful login (e.g., show an error message)
         console.error('Login failed');
         toast.error('Login failed. Please check your credentials.');
       }
@@ -153,18 +143,7 @@ const LoginForm: React.FC = () => {
 
     return JSON.parse(jsonPayload) as DecodedToken;
   };
-  // axios.interceptors.request.use(
-  //   (config) => {
-  //     const token = localStorage.getItem('accessToken');
-  //     if (token) {
-  //       config.headers.Authorization = `Bearer ${token}`;
-  //     }
-  //     return config;
-  //   },
-  //   (error) => {
-  //     return Promise.reject(error);
-  //   }
-  // );
+
 
 
   return (
@@ -253,9 +232,24 @@ const LoginForm: React.FC = () => {
 
                 // value={password} onChange={(e) => setPassword(e.target.value)}
                 />
-                <a className="form__link">Forgot your password?</a>
+                {/* <a className="form__link">Forgot your password?</a> */}
                 <button className="form__button button submit" onClick={handleLogin}>SIGN IN</button>
               </form>
+              {/* <ToastContainer autoClose={1000} /> */}
+              <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+                transition:Bounce
+              />
+
             </div>
             <div className="switch" id="switch-cnt">
               <div className="switch__circle" />

@@ -2,16 +2,22 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import '../assets/css/cardcomponent.css';
 import { ShoppingCart, PlusCircle, MinusCircle } from 'react-feather';
-
 import Navbar from "../components/navbar";
-// import CardComponent from '../components/cardcomponent';
-// import CreateCardForm from '../admin/createpaint';
 import axios from 'axios';
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom';
 
 const Canvaspainting: React.FC = () => {
   const [items, setItems] = useState([]);
   const userId = localStorage.getItem('id');
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (!localStorage.getItem("accessToken")) {
+      // navigate('/login', { replace: true })
+      toast.error('Please LOGIN ');
 
+    }
+  }, [])
   const [category, setCategory] = useState('canvas-painting');
   useEffect(() => {
     fetchData();
@@ -35,8 +41,12 @@ const Canvaspainting: React.FC = () => {
         itemQuantity: quantities[itemId] || 1
       });
       console.log('Item added to cart:', response.data);
+      toast.success("successfull added item to your cart")
+
     } catch (error) {
       console.error('Error adding item to cart:', error);
+      toast.error("Failed to add the item to your cart");
+
     }
   };
 
@@ -94,7 +104,19 @@ const Canvaspainting: React.FC = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </div><ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            transition:Bounce
+          />
         </div>
       </div>
     </>

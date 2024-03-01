@@ -6,6 +6,7 @@ import { Search, ShoppingCart, MinusCircle, PlusCircle } from "react-feather";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import '../assets/css/cardcomponent.css';
+import { ToastContainer, toast } from "react-toastify";
 
 
 interface Item {
@@ -20,16 +21,24 @@ interface Item {
 const Searchproduct: React.FC = () => {
     const [items, setItems] = useState<Item[]>([]);
     const userId = localStorage.getItem('id');
-
     const [searchData, setSearchData] = useState<string | undefined>();
-    const { data: searchByName, refetch } = useQuery({
-        queryKey: ["SEARCHBYNAME"],
-        queryFn: () => {
-            return axios.get("http://localhost:8082/item/searchByName/" + searchData, {
-                headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") }
-            }).then(response => response.data);
-        },
 
+    const { data: searchByName, refetch, isError } = useQuery({
+        queryKey: ["SEARCHBYNAME"],
+        queryFn: async () => {
+            try {
+                const response = await axios.get("http://localhost:8082/item/searchByName/" + searchData);
+                if (!response.data || ) {
+                    toast.error("SORRY, NO DATA FOUND")
+                    throw new Error('No data returned from the server');
+                }
+                return response.data;
+            } catch (error) {
+                toast.error("ERROR FECTING DATA FROM SERVER")
+                throw new Error('Error fetching data: ' + error.message);
+
+            }
+        },
     });
     useEffect(() => {
         if (searchByName) {
@@ -50,8 +59,10 @@ const Searchproduct: React.FC = () => {
                 itemQuantity: quantities[itemId] || 1
             });
             console.log('Item added to cart:', response.data);
+            toast.success(`ADDED TO CART`);
         } catch (error) {
             console.error('Error adding item to cart:', error);
+            toast.error(`FAILED ADDING ITEM TO CART `);
         }
     };
 
@@ -116,7 +127,19 @@ const Searchproduct: React.FC = () => {
                                 </div>
                             </div>
                         ))}
-                    </div>
+                    </div> <ToastContainer
+                        position="top-center"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme="colored"
+                        transition:Bounce
+                    />
                 </div>
 
             </div >

@@ -4,21 +4,22 @@ interface DecodedToken {
   // other token properties
 }
 import React, { useEffect, useState } from "react";
+
 const navbar: React.FC = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
   useEffect(() => {
-    // Load Feather Icons script
+    const accessToken = localStorage.getItem('accessToken');
+    setIsLoggedIn(accessToken !== null);
     const featherScript = document.createElement("script");
     featherScript.src = "https://unpkg.com/feather-icons";
     featherScript.async = true;
     document.body.appendChild(featherScript);
 
-    // Load your custom script.js
     const customScript = document.createElement("script");
-    // customScript.src = '../assets/javascript/Header.js';
     customScript.async = true;
     document.body.appendChild(customScript);
 
-    // Run feather.replace() after scripts are loaded
     featherScript.onload = () => {
       window.feather.replace();
     };
@@ -40,7 +41,12 @@ const navbar: React.FC = () => {
       window.location.href = "/login";
     }
   };
-
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("id");
+    localStorage.removeItem("name");
+    setIsLoggedIn(false);
+  };
 
   const parseJwt = (token: string) => {
     const base64Url = token.split('.')[1];
@@ -100,12 +106,39 @@ const navbar: React.FC = () => {
               <span>Help</span>
             </a>
           </li>
-          <li className="navbar__item">
+          {/* <li className="navbar__item">
             <button className="navbar__link" onClick={handleLoginRedirect}>
               <i data-feather="log-in" />
               <span>Login</span>
             </button>
           </li>
+          <li className="navbar__item">
+            <button className="navbar__link" onClick={() => { localStorage.removeItem("accessToken"); localStorage.removeItem("id"); localStorage.removeItem("name"); }} >
+              <i data-feather="log-out" />
+              <span>Logout</span>
+            </button>
+          </li> */}
+
+          {isLoggedIn ? (
+            <>
+              <li className="navbar__item">
+                <button className="navbar__link" onClick={handleLogout}>
+                  <i data-feather="log-out" />
+                  <span>Logout</span>
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li className="navbar__item">
+                <button className="navbar__link" onClick={handleLoginRedirect}>
+                  <i data-feather="log-in" />
+                  <span>Login</span>
+                </button>
+              </li>
+            </>
+          )}
+
         </ul>
       </nav>
     </>
