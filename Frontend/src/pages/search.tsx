@@ -28,8 +28,8 @@ const Searchproduct: React.FC = () => {
         queryFn: async () => {
             try {
                 const response = await axios.get("http://localhost:8082/item/searchByName/" + searchData);
-                if (!response.data || ) {
-                    toast.error("SORRY, NO DATA FOUND")
+                if (!response.data) {
+                    toast.error("SORRY, NO DATA FOUND");
                     throw new Error('No data returned from the server');
                 }
                 return response.data;
