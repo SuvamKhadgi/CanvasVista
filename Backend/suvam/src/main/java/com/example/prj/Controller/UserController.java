@@ -24,7 +24,7 @@ public class UserController {
     @PostMapping("/save")
     public String saveUser(@Valid @RequestBody UserPojo userPojo){
         userService.saveUser(userPojo);
-        return "data created successfully";
+        return "new registration saved successfully";
     }
 
     @GetMapping("/getAll")

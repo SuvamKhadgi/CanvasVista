@@ -22,37 +22,26 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
-
     private final ItemRepository itemRepository;
     private final String UPLOAD_DIRECTORY = new StringBuilder().append(System.getProperty("user.dir")).append("/canteen_mgmt/itemImage").toString();
     ImageToBase64 imageToBase64 = new ImageToBase64();
     @Override
     public void saveItem(ItemPojo itemPojo) throws IOException {
     Item item=new Item();
-
-
         if(itemPojo.getId()!=null){
             item=itemRepository.findById(itemPojo.getId())
-                    .orElseThrow(()-> new NoSuchElementException("No data found"));
-        }
-
+                    .orElseThrow(()-> new NoSuchElementException("No data found"));}
         item.setItemName(itemPojo.getItemName());
         item.setItemDescription(itemPojo.getItemDescription());
         item.setItemCategory(itemPojo.getItemCategory());
         item.setItemQuantity(itemPojo.getItemQuantity());
         item.setItemPerPrice(itemPojo.getItemPerPrice());
-
         if (itemPojo.getItemImage() != null) {
             StringBuilder fileNames = new StringBuilder();
             Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, itemPojo.getItemImage().getOriginalFilename());
             fileNames.append(itemPojo.getItemImage().getOriginalFilename());
-            Files.write(fileNameAndPath, itemPojo.getItemImage().getBytes());
-        }
-
-
+            Files.write(fileNameAndPath, itemPojo.getItemImage().getBytes());}
         item.setItemImage(itemPojo.getItemImage().getOriginalFilename());
-
-
             itemRepository.save(item);
 
     }

@@ -20,7 +20,7 @@ public class CartController {
     @PostMapping("/save")
     public String saveCart(@Valid @RequestBody CartPojo cartPojo){
         cartService.saveCart(cartPojo);
-        return "data created successfully yoh cart-item";
+        return "Item saved to cart  successfully ";
     }
     @GetMapping("/getAll")
     public List<Cart> findAll(){

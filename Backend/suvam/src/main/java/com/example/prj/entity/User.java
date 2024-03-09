@@ -1,6 +1,7 @@
 package com.example.prj.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,7 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
-
+//import javax.validation.constraints.Size;
+//
 @Setter
 @Getter
 @Entity
@@ -24,10 +26,11 @@ public class User implements UserDetails {
     private String Name;
 ;
 
-    @Column(name="email", nullable = false)
+    @Column(name="email", nullable = false , unique = true)
     private String email;
 
     @Column(name="password", nullable = false)
+    @Size(min = 8, message = "Password must be at least 8 characters long")
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)

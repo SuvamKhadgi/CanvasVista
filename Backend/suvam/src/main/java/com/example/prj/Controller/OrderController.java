@@ -22,7 +22,7 @@ public class OrderController {
     @PostMapping("/save")
     public String saveItem(@Valid @RequestBody OrderPojo orderPojo){
         orderService.saveItem(orderPojo);
-        return "data created successfully yoh order";
+        return "order saved successfully to order";
     }
 
     @GetMapping("/getAll")

@@ -2,7 +2,7 @@ package com.example.prj.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
+//import data.sql;
 @Builder
 @Getter
 @Setter
